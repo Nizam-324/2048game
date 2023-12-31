@@ -579,77 +579,66 @@
      <!-- ------------------------------------------------- -->
      
      <script>
-                var touchStartX = 0;
-                var touchStartY = 0;
-        
-                document.addEventListener('touchstart', handleTouchStart, false);
-                document.addEventListener('touchmove', handleTouchMove, false);
-        
-                function handleTouchStart(event) {
-                    touchStartX = event.touches[0].clientX;
-                    touchStartY = event.touches[0].clientY;
-                }
-        
-                function handleTouchMove(event) {
-                    if (!touchStartX || !touchStartY) return;
-        
-                    var touchEndX = event.touches[0].clientX;
-                    var touchEndY = event.touches[0].clientY;
-        
-                    var deltaX = touchEndX - touchStartX;
-                    var deltaY = touchEndY - touchStartY;
-        
-                    // Determine swipe direction based on deltaX and deltaY
-                    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                        if (deltaX > 0) {
-                            // Swipe right
-                            moveTilesMobile(39);
-                        } else {
-                            // Swipe left
-                            moveTilesMobile(37);
-                        }
-                    } else {
-                        if (deltaY > 0) {
-                            // Swipe down
-                            moveTilesMobile(40);
-                        } else {
-                            // Swipe up
-                            moveTilesMobile(38);
-                        }
-                    }
-        
-                    touchStartX = 0;
-                    touchStartY = 0;
-                }
-        
-                window.onload = function() {
-                    buildGridOverlay();
-                    cellCreator(2, 0);
-                    directions();
-                    score(0);
-                };
-        
-                
+                // Add event listeners for touch events
+document.addEventListener('touchstart', handleTouchStart, false);
+document.addEventListener('touchmove', handleTouchMove, false);
 
-                 // Add logic to handle touch events for mobile
-        function moveTilesMobile(direction) {
-            if (direction === 37) {
-                // Swipe left logic
-                moveTilesMain(2, 0, -1, 0, 1, 0);
-            } else if (direction === 38) {
-                // Swipe up logic
-                moveTilesMain(2, 0, 0, -1, 1, 0);
-            } else if (direction === 39) {
-                // Swipe right logic
-                moveTilesMain(2, 0, 1, 0, 1, 0);
-            } else if (direction === 40) {
-                // Swipe down logic
-                moveTilesMain(2, 0, 0, 1, 1, 0);
-            }
+// Handle touch start
+function handleTouchStart(event) {
+    touchStartX = event.touches[0].clientX;
+    touchStartY = event.touches[0].clientY;
+}
+
+// Handle touch move
+function handleTouchMove(event) {
+    if (!touchStartX || !touchStartY) return;
+
+    var touchEndX = event.touches[0].clientX;
+    var touchEndY = event.touches[0].clientY;
+
+    var deltaX = touchEndX - touchStartX;
+    var deltaY = touchEndY - touchStartY;
+
+    // Determine swipe direction based on deltaX and deltaY
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX > 0) {
+            // Swipe right
+            moveTilesMobile(39);
+        } else {
+            // Swipe left
+            moveTilesMobile(37);
         }
-        
-                // ... existing functions ...
-        
+    } else {
+        if (deltaY > 0) {
+            // Swipe down
+            moveTilesMobile(40);
+        } else {
+            // Swipe up
+            moveTilesMobile(38);
+        }
+    }
+
+    touchStartX = 0;
+    touchStartY = 0;
+}
+
+// Handle touch events for mobile
+function moveTilesMobile(direction) {
+    if (direction === 37) {
+        // Swipe left logic
+        moveTilesMain(2, 0, -1, 0, 1, 0);
+    } else if (direction === 38) {
+        // Swipe up logic
+        moveTilesMain(2, 0, 0, -1, 1, 0);
+    } else if (direction === 39) {
+        // Swipe right logic
+        moveTilesMain(2, 0, 1, 0, 1, 0);
+    } else if (direction === 40) {
+        // Swipe down logic
+        moveTilesMain(2, 0, 0, 1, 1, 0);
+    }
+}
+
             </script>
         </body>
 </html>

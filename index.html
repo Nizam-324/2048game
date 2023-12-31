@@ -579,9 +579,9 @@
      <!-- ------------------------------------------------- -->
      
      <script>
-                // Add event listeners for touch events
-document.addEventListener('touchstart', handleTouchStart, false);
-document.addEventListener('touchmove', handleTouchMove, false);
+// Add event listeners for touch events
+document.addEventListener('touchstart', handleTouchStart, { passive: false });
+document.addEventListener('touchmove', handleTouchMove, { passive: false });
 
 // Handle touch start
 function handleTouchStart(event) {
@@ -591,6 +591,8 @@ function handleTouchStart(event) {
 
 // Handle touch move
 function handleTouchMove(event) {
+    event.preventDefault();
+
     if (!touchStartX || !touchStartY) return;
 
     var touchEndX = event.touches[0].clientX;
@@ -621,6 +623,7 @@ function handleTouchMove(event) {
     touchStartX = 0;
     touchStartY = 0;
 }
+
 
 // Handle touch events for mobile
 function moveTilesMobile(direction) {
